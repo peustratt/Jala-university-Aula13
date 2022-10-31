@@ -7,16 +7,10 @@ public class WalletService : IWalletService
     {
         _wallet = wallet;
     }
-    public Dictionary<string, decimal> Currencies { get; set; } = new Dictionary<string, decimal>()
-    {
-        {"USD", 0.18M},
-        {"CAD", 0.90M},
-        {"EUR", 0.20M},
-    };
 
     public Tuple<string, decimal> ExchangeMoney(string outgoingCurrency, decimal amount)
     {
-        if (!Currencies.TryGetValue(outgoingCurrency,out var to))
+        if (!Currencies.Availables.TryGetValue(outgoingCurrency,out var to))
         {
             throw new ArgumentException("Invalid currency");
         }
